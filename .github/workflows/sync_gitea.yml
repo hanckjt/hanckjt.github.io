@@ -23,18 +23,16 @@ jobs:
         ssh-keyscan -p 223 -H gitea.magictech.ai >> ~/.ssh/known_hosts
         echo -e "Host gitea.magictech.ai\n  HostName gitea.magictech.ai\n  IdentityFile ~/.ssh/id_rsa\n  Port 223\n" >> ~/.ssh/config
 
-    - name: Debug SSH setup
-      run: |
-        ls -la ~/.ssh
-        cat ~/.ssh/known_hosts
-        cat ~/.ssh/config
-        cat ~/.ssh/id_rsa # 检查私钥内容和格式
-
     - name: Add Gitea remote
       run: git remote add gitea ssh://git@gitea.magictech.ai:223/hank/hanckjt.github.io.git
 
     - name: Fetch Gitea main branch
       run: git fetch gitea main
+
+    - name: Configure Git user
+      run: |
+        git config --global user.email "hanckjt@gmail.com"
+        git config --global user.name "Hank"
 
     - name: Merge Gitea main into master
       run: |
