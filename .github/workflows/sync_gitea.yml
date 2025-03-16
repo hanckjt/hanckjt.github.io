@@ -21,6 +21,8 @@ jobs:
         echo "${{ secrets.Hexo }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H gitea.magictech.ai >> ~/.ssh/known_hosts
+        cat ~/.ssh/id_rsa # 输出私钥内容以便调试
+        ls -la ~/.ssh # 列出~/.ssh目录内容以便调试
 
     - name: Debug SSH setup
       run: |
