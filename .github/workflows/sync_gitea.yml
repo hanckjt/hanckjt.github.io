@@ -2,7 +2,7 @@ name: Sync main branch from Gitea
 
 on:
   schedule:
-    - cron: '*/10 * * * *' # 每10分钟运行一次
+    - cron: '*/5 * * * *' # 每5分钟运行一次
 
 jobs:
   sync:
