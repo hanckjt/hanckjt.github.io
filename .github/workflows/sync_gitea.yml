@@ -22,14 +22,13 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -p 223 -H gitea.magictech.ai >> ~/.ssh/known_hosts
         echo -e "Host gitea.magictech.ai\n  HostName gitea.magictech.ai\n  IdentityFile ~/.ssh/id_rsa\n  Port 223\n" >> ~/.ssh/config
-      env:
-        Hexo: ${{ secrets.Hexo }}
-    
+
     - name: Debug SSH setup
       run: |
         ls -la ~/.ssh
         cat ~/.ssh/known_hosts
         cat ~/.ssh/config
+        cat ~/.ssh/id_rsa # 检查私钥内容和格式
 
     - name: Add Gitea remote
       run: git remote add gitea ssh://git@gitea.magictech.ai:223/hank/hanckjt.github.io.git
