@@ -22,6 +22,11 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H gitea.magictech.ai >> ~/.ssh/known_hosts
 
+    - name: Debug SSH setup
+      run: |
+        ls -la ~/.ssh
+        cat ~/.ssh/known_hosts
+
     - name: Add Gitea remote
       run: git remote add gitea ssh://git@gitea.magictech.ai:223/hank/hanckjt.github.io.git
 
