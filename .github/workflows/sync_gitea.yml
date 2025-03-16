@@ -37,7 +37,7 @@ jobs:
     - name: Force merge Gitea main into master
       run: |
         git checkout master
-        git merge gitea/main --strategy-option theirs
+        git merge gitea/main --allow-unrelated-histories --strategy-option theirs
 
     - name: Push changes to GitHub
       env:
