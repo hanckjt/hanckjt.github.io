@@ -24,6 +24,8 @@
     <h1>Let's plot random numbers</h1>
     <div id="plot"></div>
     <py-script output="plot">
+await micropip.install("matplotlib")
+await micropip.install("numpy")
 import matplotlib.pyplot as plt
 import numpy as np
 
