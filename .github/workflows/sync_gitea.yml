@@ -21,7 +21,7 @@ jobs:
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
     - name: Add Gitea remote
-      run: git remote add gitea https://gitea.magictech.ai/hank/hanckjt.github.io.git
+      run: git remote add gitea ssh://git@gitea.magictech.ai:222/hank/hanckjt.github.io.git
 
     - name: Fetch Gitea main branch
       run: git fetch gitea main
