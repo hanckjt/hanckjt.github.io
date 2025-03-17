@@ -116,16 +116,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -142,6 +142,88 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.hank.host/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hank Jing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赛博陶园">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 赛博陶园">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">开源小工具</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-16 17:36:38 / Modified: 17:36:02" itemprop="dateCreated datePublished" datetime="2025-03-16T17:36:38+08:00">2025-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开源工具</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="字幕相关："><a href="#字幕相关：" class="headerlink" title="字幕相关："></a>字幕相关：</h1><h2 id="pysubs2"><a href="#pysubs2" class="headerlink" title="pysubs2:"></a>pysubs2:</h2><p><a target="_blank" rel="noopener" href="https://github.com/tkarabela/pysubs2/">pysubs2</a>是一个用于编辑字幕文件的Python库。它基于SubStation  Alpha，即Aegisub的本地格式；同时也支持SubRip（SRT）、MicroDVD、MPL2、TMP、WebVTT、TTML和SAMI格式。此外，还有一个用于批量转换和重新计时的CLI小工具。</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install pysubs2</span><br><span class="line">pysubs2 --shift 0.3s *.srt</span><br><span class="line">pysubs2 --to srt *.ass</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pysubs2</span><br><span class="line">subs = pysubs2.load(<span class="string">"my_subtitles.ass"</span>, encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">subs.shift(s=<span class="number">2.5</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> subs:</span><br><span class="line">    line.text = <span class="string">"{\\be1}"</span> + line.text</span><br><span class="line">subs.save(<span class="string">"my_subtitles_edited.ass"</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

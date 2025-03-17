@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://blog.hank.host/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/</loc>
+    
+    <lastmod>2025-03-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.hank.host/2025/03/16/Test/</loc>
     
     <lastmod>2025-03-16</lastmod>
@@ -58,7 +67,7 @@
 
   <url>
     <loc>https://blog.hank.host/</loc>
-    <lastmod>2025-03-16</lastmod>
+    <lastmod>2025-03-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -66,14 +75,28 @@
   
   <url>
     <loc>https://blog.hank.host/tags/AI/</loc>
-    <lastmod>2025-03-16</lastmod>
+    <lastmod>2025-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.hank.host/tags/LLM/</loc>
-    <lastmod>2025-03-16</lastmod>
+    <lastmod>2025-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.hank.host/tags/Github/</loc>
+    <lastmod>2025-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.hank.host/tags/Tool/</loc>
+    <lastmod>2025-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -82,7 +105,14 @@
   
   <url>
     <loc>https://blog.hank.host/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
-    <lastmod>2025-03-16</lastmod>
+    <lastmod>2025-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.hank.host/categories/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2025-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
