@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.hank.host/2025/03/16/Test1/</loc>
+    <loc>https://blog.hank.host/talks/index.html</loc>
     
     <lastmod>2025-03-16</lastmod>
     
@@ -12,15 +12,6 @@
   
   <url>
     <loc>https://blog.hank.host/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/</loc>
-    
-    <lastmod>2025-03-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.hank.host/2025/03/16/Test/</loc>
     
     <lastmod>2025-03-16</lastmod>
     
@@ -41,24 +32,6 @@
     <loc>https://blog.hank.host/404/index.html</loc>
     
     <lastmod>2025-03-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.hank.host/2025/03/15/Hello-Hexo/</loc>
-    
-    <lastmod>2025-03-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.hank.host/2025/03/15/hello-world/</loc>
-    
-    <lastmod>2025-03-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
