@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>赛博陶园</title>
+  
+  <subtitle>CyberTao</subtitle>
+  <link href="https://blog.hank.host/atom.xml" rel="self"/>
+  
+  <link href="https://blog.hank.host/"/>
+  <updated>2025-03-16T09:36:02.745Z</updated>
+  <id>https://blog.hank.host/</id>
+  
+  <author>
+    <name>Hank Jing</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开源小工具</title>
+    <link href="https://blog.hank.host/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/"/>
+    <id>https://blog.hank.host/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/</id>
+    <published>2025-03-16T09:36:38.468Z</published>
+    <updated>2025-03-16T09:36:02.745Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="字幕相关："><a href="#字幕相关：" class="headerlink" title="字幕相关："></a>字幕相关：</h1><h2 id="pysubs2"><a href="#pysubs2" class="headerlink" title="pysubs2:"></a>pysubs2:</h2><p><a href="https://github.com/tkarabela/pysubs2/">pysubs2</a>是一个用于编辑字幕文件的Python库。它基于SubStation  Alpha，即Aegisub的本地格式；同时也支持SubRip（SRT）、MicroDVD、MPL2、TMP、WebVTT、TTML和SAMI格式。此外，还有一个用于批量转换和重新计时的CLI小工具。</p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install pysubs2</span><br><span class="line">pysubs2 --shift 0.3s *.srt</span><br><span class="line">pysubs2 --to srt *.ass</span><br></pre></td></tr></tbody></table></figure><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pysubs2</span><br><span class="line">subs = pysubs2.load(<span class="string">"my_subtitles.ass"</span>, encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">subs.shift(s=<span class="number">2.5</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> subs:</span><br><span class="line">    line.text = <span class="string">"{\\be1}"</span> + line.text</span><br><span class="line">subs.save(<span class="string">"my_subtitles_edited.ass"</span>)</span><br></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;字幕相关：&quot;&gt;&lt;a href=&quot;#字幕相关：&quot; class=&quot;headerlink&quot; title=&quot;字幕相关：&quot;&gt;&lt;/a&gt;字幕相关：&lt;/h1&gt;&lt;h2 id=&quot;pysubs2&quot;&gt;&lt;a href=&quot;#pysubs2&quot; class=&quot;headerlink&quot; title=</summary>
+      
+    
+    
+    
+    <category term="开源工具" scheme="https://blog.hank.host/categories/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="Github" scheme="https://blog.hank.host/tags/Github/"/>
+    
+    <category term="Tool" scheme="https://blog.hank.host/tags/Tool/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试</title>
+    <link href="https://blog.hank.host/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/"/>
+    <id>https://blog.hank.host/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/</id>
+    <published>2025-03-16T08:22:10.954Z</published>
+    <updated>2025-03-16T08:25:38.807Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-ShareGPT"><a href="#1-ShareGPT" class="headerlink" title="1. ShareGPT"></a>1. <strong>ShareGPT</strong></h3><p><strong>定义与背景</strong>：ShareGPT 是一种基于真实多轮对话数据的指令微调格式，最初来源于用户在社交平台分享的与聊天模型的交互记录。其核心目标是帮助模型学习复杂的多轮对话上下文保持能力，提升连贯性、信息检索和一致性2。<strong>测试特点</strong>：</p><ul><li><strong>多轮对话场景</strong>：测试模型在多轮交互中的表现，例如聊天机器人、客服问答等。</li><li><strong>数据结构</strong>：使用 <code>conversations</code> 字段记录用户与模型的交替对话，支持多种角色（如 human、gpt、function_call 等），并强调对话流的自然性2。</li><li><strong>应用场景</strong>：主要用于评估模型对长上下文的理解和生成能力，而非单轮任务的执行效率。</li></ul><hr><h3 id="2-Decode-heavy"><a href="#2-Decode-heavy" class="headerlink" title="2. Decode-heavy"></a>2. <strong>Decode-heavy</strong></h3><p><strong>定义与背景</strong>：Decode-heavy（解码密集型）测试关注模型在生成文本时的解码阶段性能。解码阶段是模型根据已生成的上下文逐步预测下一个词的过程，通常涉及复杂的自回归计算。<strong>测试特点</strong>：</p><ul><li><strong>计算负载</strong>：测试模型在解码阶段的资源消耗（如 GPU 显存、计算时间），尤其是长文本生成场景下的性能瓶颈410。</li><li><strong>典型指标</strong>：包括生成速度（如每秒生成的 Token 数）、显存占用、解码算法的效率（如 Beam Search、Top-K 采样）等10。</li><li><strong>应用场景</strong>：适用于需要实时生成文本的应用（如对话系统、翻译工具），优化目标是减少生成延迟并提升吞吐量。</li></ul><hr><h3 id="3-Prefill-heavy"><a href="#3-Prefill-heavy" class="headerlink" title="3. Prefill-heavy"></a>3. <strong>Prefill-heavy</strong></h3><p><strong>定义与背景</strong>：Prefill-heavy（预填充密集型）测试聚焦于模型处理输入文本的预填充阶段，即模型将输入文本转换为键值（KV）缓存的过程。这一阶段的计算量取决于输入长度和模型架构。<strong>测试特点</strong>：</p><ul><li><strong>输入处理性能</strong>：测试模型对长输入文本的处理能力（如文档总结、长问答），衡量预填充阶段的延迟和显存占用410。</li><li><strong>优化方向</strong>：通过改进 KV 缓存机制、并行计算或模型架构（如稀疏注意力）提升效率。</li><li><strong>应用场景</strong>：常见于需要处理长上下文的场景（如法律文档分析、代码生成），要求模型快速理解并缓存输入内容。</li></ul><hr><h3 id="三者的核心区别"><a href="#三者的核心区别" class="headerlink" title="三者的核心区别"></a>三者的核心区别</h3><table><thead><tr><th><strong>维度</strong></th><th><strong>ShareGPT</strong></th><th><strong>Decode-heavy</strong></th><th><strong>Prefill-heavy</strong></th></tr></thead><tbody><tr><td><strong>测试目标</strong></td><td>多轮对话连贯性与上下文保持</td><td>解码阶段的生成效率</td><td>输入处理阶段的预填充效率</td></tr><tr><td><strong>数据特点</strong></td><td>多轮对话结构化数据</td><td>长输出生成任务</td><td>长输入处理任务</td></tr><tr><td><strong>资源消耗</strong></td><td>依赖对话轮次和上下文长度</td><td>解码时显存与计算资源密集</td><td>预填充时显存与计算资源密集</td></tr><tr><td><strong>典型优化手段</strong></td><td>增强上下文记忆机制</td><td>优化解码算法（如 Beam Search）</td><td>改进 KV 缓存策略</td></tr></tbody></table><hr><h3 id="总结😎"><a href="#总结😎" class="headerlink" title="总结😎"></a>总结😎</h3><ul><li><strong>ShareGPT</strong> 侧重于评估模型在复杂对话流中的表现，属于功能性和场景化测试2。</li><li><strong>Decode-heavy</strong> 和 <strong>Prefill-heavy</strong> 属于性能测试的子类，分别针对生成阶段和输入处理阶段的资源效率进行优化410。</li><li>实际应用中，这三类测试可能结合使用。例如，在部署多轮对话系统时，需同时验证 ShareGPT 格式的对话质量（功能测试）、解码阶段的响应速度（Decode-heavy 测试）及长上下文的处理能力（Prefill-heavy 测试）。</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;1-ShareGPT&quot;&gt;&lt;a href=&quot;#1-ShareGPT&quot; class=&quot;headerlink&quot; title=&quot;1. ShareGPT&quot;&gt;&lt;/a&gt;1. &lt;strong&gt;ShareGPT&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;定义与背景&lt;/stro</summary>
+      
+    
+    
+    
+    <category term="人工智能" scheme="https://blog.hank.host/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    
+    <category term="AI" scheme="https://blog.hank.host/tags/AI/"/>
+    
+    <category term="LLM" scheme="https://blog.hank.host/tags/LLM/"/>
+    
+  </entry>
+  
+</feed>
