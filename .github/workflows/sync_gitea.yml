@@ -1,8 +1,8 @@
 name: Sync main branch from Gitea
 
 on:
-  schedule:
-    - cron: '*/5 * * * *' # 每5分钟运行一次
+  repository_dispatch:
+    types: [sync_gitea]
 
 jobs:
   sync:
@@ -12,34 +12,34 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        repository: hanckjt/hanckjt.github.io
-        ref: master
+        repository: ${{ vars.MY_REPO }}
+        ref: ${{ vars.MY_BRANCH }}
 
     - name: Set up SSH
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.Hexo }}" > ~/.ssh/id_rsa
+        echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -p 223 -H gitea.magictech.ai >> ~/.ssh/known_hosts
-        echo -e "Host gitea.magictech.ai\n  HostName gitea.magictech.ai\n  IdentityFile ~/.ssh/id_rsa\n  Port 223\n" >> ~/.ssh/config
+        ssh-keyscan -p ${{ vars.SSH_PORT }} -H ${{ vars.GITEA_HOST }} >> ~/.ssh/known_hosts
+        echo -e "Host ${{ vars.GITEA_HOST }}\n  HostName ${{ vars.GITEA_HOST }}\n  IdentityFile ~/.ssh/id_rsa\n  Port ${{ vars.SSH_PORT }}\n" >> ~/.ssh/config
 
     - name: Add Gitea remote
-      run: git remote add gitea ssh://git@gitea.magictech.ai:223/hank/hanckjt.github.io.git
+      run: git remote add gitea ${{ vars.GITEA_URL }}
 
     - name: Fetch Gitea main branch
-      run: git fetch gitea main
+      run: git fetch gitea ${{ vars.GITEA_BRANCH }}
 
     - name: Configure Git user
       run: |
-        git config --global user.email "hanckjt@gmail.com"
-        git config --global user.name "Hank"
+        git config --global user.email "${{ vars.GIT_USER_EMAIL }}"
+        git config --global user.name "${{ vars.GIT_USER_NAME }}"
 
     - name: Force merge Gitea main into master
       run: |
-        git checkout master
-        git merge gitea/main --allow-unrelated-histories --strategy-option theirs
+        git checkout ${{ vars.MY_BRANCH }}
+        git merge gitea/${{ vars.GITEA_BRANCH }} --allow-unrelated-histories --strategy-option theirs
 
     - name: Push changes to GitHub
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: git push origin master --force
+      run: git push origin ${{ vars.MY_BRANCH }} --force
