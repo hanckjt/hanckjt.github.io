@@ -1,35 +1,227 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试 | 赛博陶园</title><meta name="author" content="Hank Jing"><meta name="copyright" content="Hank Jing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. ShareGPT定义与背景：ShareGPT 是一种基于真实多轮对话数据的指令微调格式，最初来源于用户在社交平台分享的与聊天模型的交互记录。其核心目标是帮助模型学习复杂的多轮对话上下文保持能力，提升连贯性、信息检索和一致性2。测试特点：  多轮对话场景：测试模型在多轮交互中的表现，例如聊天机器人、客服问答等。 数据结构：使用 conversations 字段记录用户与模型的交替对话，支持多种">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试">
+<meta property="og:url" content="https://blog.hank.host/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:site_name" content="赛博陶园">
+<meta property="og:description" content="1. ShareGPT定义与背景：ShareGPT 是一种基于真实多轮对话数据的指令微调格式，最初来源于用户在社交平台分享的与聊天模型的交互记录。其核心目标是帮助模型学习复杂的多轮对话上下文保持能力，提升连贯性、信息检索和一致性2。测试特点：  多轮对话场景：测试模型在多轮交互中的表现，例如聊天机器人、客服问答等。 数据结构：使用 conversations 字段记录用户与模型的交替对话，支持多种">
+<meta property="og:locale">
+<meta property="og:image" content="https://blog.hank.host/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-03-16T08:22:10.954Z">
+<meta property="article:modified_time" content="2025-03-16T08:25:38.807Z">
+<meta property="article:author" content="Hank Jing">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="LLM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.hank.host/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试",
+  "url": "https://blog.hank.host/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/",
+  "image": "https://blog.hank.host/img/butterfly-icon.png",
+  "datePublished": "2025-03-16T08:22:10.954Z",
+  "dateModified": "2025-03-16T08:25:38.807Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Hank Jing",
+      "url": "https://blog.hank.host/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.hank.host/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
 
-    article#article-container.container.post-content
-      if theme.noticeOutdate.enable && page.noticeOutdate !== false
-        include includes/post/outdate-notice.pug
-      else
-        !=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (page.tags.length > 0 && theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
-    if theme.reward.enable && theme.reward.QR_code
-      !=partial('includes/post/reward', {}, {cache: true})
-
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
-
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
-
-    if page.comments !== false && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="赛博陶园" type="application/atom+xml">
+</head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">赛博陶园</span></a><a class="nav-page-title" href="/"><span class="site-name">ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-03-16T08:22:10.954Z" title="Created 2025-03-16 16:22:10">2025-03-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-03-16T08:25:38.807Z" title="Updated 2025-03-16 16:25:38">2025-03-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="1-ShareGPT"><a href="#1-ShareGPT" class="headerlink" title="1. ShareGPT"></a>1. <strong>ShareGPT</strong></h3><p><strong>定义与背景</strong>：ShareGPT 是一种基于真实多轮对话数据的指令微调格式，最初来源于用户在社交平台分享的与聊天模型的交互记录。其核心目标是帮助模型学习复杂的多轮对话上下文保持能力，提升连贯性、信息检索和一致性2。<strong>测试特点</strong>：</p>
+<ul>
+<li><strong>多轮对话场景</strong>：测试模型在多轮交互中的表现，例如聊天机器人、客服问答等。</li>
+<li><strong>数据结构</strong>：使用 <code>conversations</code> 字段记录用户与模型的交替对话，支持多种角色（如 human、gpt、function_call 等），并强调对话流的自然性2。</li>
+<li><strong>应用场景</strong>：主要用于评估模型对长上下文的理解和生成能力，而非单轮任务的执行效率。</li>
+</ul>
+<hr>
+<h3 id="2-Decode-heavy"><a href="#2-Decode-heavy" class="headerlink" title="2. Decode-heavy"></a>2. <strong>Decode-heavy</strong></h3><p><strong>定义与背景</strong>：Decode-heavy（解码密集型）测试关注模型在生成文本时的解码阶段性能。解码阶段是模型根据已生成的上下文逐步预测下一个词的过程，通常涉及复杂的自回归计算。<strong>测试特点</strong>：</p>
+<ul>
+<li><strong>计算负载</strong>：测试模型在解码阶段的资源消耗（如 GPU 显存、计算时间），尤其是长文本生成场景下的性能瓶颈410。</li>
+<li><strong>典型指标</strong>：包括生成速度（如每秒生成的 Token 数）、显存占用、解码算法的效率（如 Beam Search、Top-K 采样）等10。</li>
+<li><strong>应用场景</strong>：适用于需要实时生成文本的应用（如对话系统、翻译工具），优化目标是减少生成延迟并提升吞吐量。</li>
+</ul>
+<hr>
+<h3 id="3-Prefill-heavy"><a href="#3-Prefill-heavy" class="headerlink" title="3. Prefill-heavy"></a>3. <strong>Prefill-heavy</strong></h3><p><strong>定义与背景</strong>：Prefill-heavy（预填充密集型）测试聚焦于模型处理输入文本的预填充阶段，即模型将输入文本转换为键值（KV）缓存的过程。这一阶段的计算量取决于输入长度和模型架构。<strong>测试特点</strong>：</p>
+<ul>
+<li><strong>输入处理性能</strong>：测试模型对长输入文本的处理能力（如文档总结、长问答），衡量预填充阶段的延迟和显存占用410。</li>
+<li><strong>优化方向</strong>：通过改进 KV 缓存机制、并行计算或模型架构（如稀疏注意力）提升效率。</li>
+<li><strong>应用场景</strong>：常见于需要处理长上下文的场景（如法律文档分析、代码生成），要求模型快速理解并缓存输入内容。</li>
+</ul>
+<hr>
+<h3 id="三者的核心区别"><a href="#三者的核心区别" class="headerlink" title="三者的核心区别"></a>三者的核心区别</h3><table>
+<thead>
+<tr>
+<th><strong>维度</strong></th>
+<th><strong>ShareGPT</strong></th>
+<th><strong>Decode-heavy</strong></th>
+<th><strong>Prefill-heavy</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>测试目标</strong></td>
+<td>多轮对话连贯性与上下文保持</td>
+<td>解码阶段的生成效率</td>
+<td>输入处理阶段的预填充效率</td>
+</tr>
+<tr>
+<td><strong>数据特点</strong></td>
+<td>多轮对话结构化数据</td>
+<td>长输出生成任务</td>
+<td>长输入处理任务</td>
+</tr>
+<tr>
+<td><strong>资源消耗</strong></td>
+<td>依赖对话轮次和上下文长度</td>
+<td>解码时显存与计算资源密集</td>
+<td>预填充时显存与计算资源密集</td>
+</tr>
+<tr>
+<td><strong>典型优化手段</strong></td>
+<td>增强上下文记忆机制</td>
+<td>优化解码算法（如 Beam Search）</td>
+<td>改进 KV 缓存策略</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="总结😎"><a href="#总结😎" class="headerlink" title="总结😎"></a>总结😎</h3><ul>
+<li><strong>ShareGPT</strong> 侧重于评估模型在复杂对话流中的表现，属于功能性和场景化测试2。</li>
+<li><strong>Decode-heavy</strong> 和 <strong>Prefill-heavy</strong> 属于性能测试的子类，分别针对生成阶段和输入处理阶段的资源效率进行优化410。</li>
+<li>实际应用中，这三类测试可能结合使用。例如，在部署多轮对话系统时，需同时验证 ShareGPT 格式的对话质量（功能测试）、解码阶段的响应速度（Decode-heavy 测试）及长上下文的处理能力（Prefill-heavy 测试）。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://blog.hank.host">Hank Jing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://blog.hank.host/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/">https://blog.hank.host/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI/">AI</a><a class="post-meta__tags" href="/tags/LLM/">LLM</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="开源小工具"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">开源小工具</div></div><div class="info-2"><div class="info-item-1">字幕相关：pysubs2:pysubs2是一个用于编辑字幕文件的Python库。它基于SubStation  Alpha，即Aegisub的本地格式；同时也支持SubRip（SRT）、MicroDVD、MPL2、TMP、WebVTT、TTML和SAMI格式。此外，还有一个用于批量转换和重新计时的CLI小工具。 123pip install pysubs2pysubs2 --shift 0.3s *.srtpysubs2 --to srt *.ass  123456import pysubs2subs = pysubs2.load("my_subtitles.ass", encoding="utf-8")subs.shift(s=2.5)for line in subs:    line.text = "{\\be1}" + line.textsubs.save("my_subtitles_edited.ass") </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Hank Jing</div><div class="author-info-description">个人爱好与技术分享</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ShareGPT"><span class="toc-number">1.</span> <span class="toc-text">1. ShareGPT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Decode-heavy"><span class="toc-number">2.</span> <span class="toc-text">2. Decode-heavy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Prefill-heavy"><span class="toc-number">3.</span> <span class="toc-text">3. Prefill-heavy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E8%80%85%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8C%BA%E5%88%AB"><span class="toc-number">4.</span> <span class="toc-text">三者的核心区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%F0%9F%98%8E"><span class="toc-number">5.</span> <span class="toc-text">总结😎</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="开源小工具">开源小工具</a><time datetime="2025-03-16T09:36:38.468Z" title="Created 2025-03-16 17:36:38">2025-03-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/" title="ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试">ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试</a><time datetime="2025-03-16T08:22:10.954Z" title="Created 2025-03-16 16:22:10">2025-03-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Hank Jing</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
