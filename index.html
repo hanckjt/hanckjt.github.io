@@ -1,343 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>赛博陶园</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="个人爱好与技术分享">
-<meta property="og:type" content="website">
-<meta property="og:title" content="赛博陶园">
-<meta property="og:url" content="https://blog.hank.host/index.html">
-<meta property="og:site_name" content="赛博陶园">
-<meta property="og:description" content="个人爱好与技术分享">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="Hank Jing">
-<meta property="article:tag" content="AI Agent LLM Python Game">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="赛博陶园" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+const { Component } = require('inferno');
+const classname = require('hexo-component-inferno/lib/util/classname');
+const Head = require('./common/head');
+const Navbar = require('./common/navbar');
+const Widgets = require('./common/widgets');
+const Footer = require('./common/footer');
+const Scripts = require('./common/scripts');
+const Search = require('./common/search');
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+module.exports = class extends Component {
+    render() {
+        const { site, config, page, helper, body } = this.props;
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+        const language = page.lang || page.language || config.language;
+        const columnCount = Widgets.getColumnCount(config.widgets, config, page);
 
-<meta name="generator" content="Hexo 7.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">赛博陶园</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">CyberTao</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.hank.host"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-开源小工具" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/" class="article-date">
-  <time class="dt-published" datetime="2025-03-16T09:36:38.468Z" itemprop="datePublished">2025-03-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/">开源工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/">开源小工具</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="字幕相关："><a href="#字幕相关：" class="headerlink" title="字幕相关："></a>字幕相关：</h1><h2 id="pysubs2"><a href="#pysubs2" class="headerlink" title="pysubs2:"></a>pysubs2:</h2><p><a target="_blank" rel="noopener" href="https://github.com/tkarabela/pysubs2/">pysubs2</a>是一个用于编辑字幕文件的Python库。它基于SubStation  Alpha，即Aegisub的本地格式；同时也支持SubRip（SRT）、MicroDVD、MPL2、TMP、WebVTT、TTML和SAMI格式。此外，还有一个用于批量转换和重新计时的CLI小工具。</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install pysubs2</span><br><span class="line">pysubs2 --shift 0.3s *.srt</span><br><span class="line">pysubs2 --to srt *.ass</span><br></pre></td></tr></tbody></table></figure>
-
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pysubs2</span><br><span class="line">subs = pysubs2.load(<span class="string">"my_subtitles.ass"</span>, encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">subs.shift(s=<span class="number">2.5</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> subs:</span><br><span class="line">    line.text = <span class="string">"{\\be1}"</span> + line.text</span><br><span class="line">subs.save(<span class="string">"my_subtitles_edited.ass"</span>)</span><br></pre></td></tr></tbody></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://blog.hank.host/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/" data-id="cm8cx2kvn00033zd8bbq18ol2" data-title="开源小工具" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tool/" rel="tag">Tool</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-三大模型测试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time class="dt-published" datetime="2025-03-16T08:22:10.954Z" itemprop="datePublished">2025-03-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/">ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="1-ShareGPT"><a href="#1-ShareGPT" class="headerlink" title="1. ShareGPT"></a>1. <strong>ShareGPT</strong></h3><p><strong>定义与背景</strong>：ShareGPT 是一种基于真实多轮对话数据的指令微调格式，最初来源于用户在社交平台分享的与聊天模型的交互记录。其核心目标是帮助模型学习复杂的多轮对话上下文保持能力，提升连贯性、信息检索和一致性2。<strong>测试特点</strong>：</p>
-<ul>
-<li><strong>多轮对话场景</strong>：测试模型在多轮交互中的表现，例如聊天机器人、客服问答等。</li>
-<li><strong>数据结构</strong>：使用 <code>conversations</code> 字段记录用户与模型的交替对话，支持多种角色（如 human、gpt、function_call 等），并强调对话流的自然性2。</li>
-<li><strong>应用场景</strong>：主要用于评估模型对长上下文的理解和生成能力，而非单轮任务的执行效率。</li>
-</ul>
-<hr>
-<h3 id="2-Decode-heavy"><a href="#2-Decode-heavy" class="headerlink" title="2. Decode-heavy"></a>2. <strong>Decode-heavy</strong></h3><p><strong>定义与背景</strong>：Decode-heavy（解码密集型）测试关注模型在生成文本时的解码阶段性能。解码阶段是模型根据已生成的上下文逐步预测下一个词的过程，通常涉及复杂的自回归计算。<strong>测试特点</strong>：</p>
-<ul>
-<li><strong>计算负载</strong>：测试模型在解码阶段的资源消耗（如 GPU 显存、计算时间），尤其是长文本生成场景下的性能瓶颈410。</li>
-<li><strong>典型指标</strong>：包括生成速度（如每秒生成的 Token 数）、显存占用、解码算法的效率（如 Beam Search、Top-K 采样）等10。</li>
-<li><strong>应用场景</strong>：适用于需要实时生成文本的应用（如对话系统、翻译工具），优化目标是减少生成延迟并提升吞吐量。</li>
-</ul>
-<hr>
-<h3 id="3-Prefill-heavy"><a href="#3-Prefill-heavy" class="headerlink" title="3. Prefill-heavy"></a>3. <strong>Prefill-heavy</strong></h3><p><strong>定义与背景</strong>：Prefill-heavy（预填充密集型）测试聚焦于模型处理输入文本的预填充阶段，即模型将输入文本转换为键值（KV）缓存的过程。这一阶段的计算量取决于输入长度和模型架构。<strong>测试特点</strong>：</p>
-<ul>
-<li><strong>输入处理性能</strong>：测试模型对长输入文本的处理能力（如文档总结、长问答），衡量预填充阶段的延迟和显存占用410。</li>
-<li><strong>优化方向</strong>：通过改进 KV 缓存机制、并行计算或模型架构（如稀疏注意力）提升效率。</li>
-<li><strong>应用场景</strong>：常见于需要处理长上下文的场景（如法律文档分析、代码生成），要求模型快速理解并缓存输入内容。</li>
-</ul>
-<hr>
-<h3 id="三者的核心区别"><a href="#三者的核心区别" class="headerlink" title="三者的核心区别"></a>三者的核心区别</h3><table>
-<thead>
-<tr>
-<th><strong>维度</strong></th>
-<th><strong>ShareGPT</strong></th>
-<th><strong>Decode-heavy</strong></th>
-<th><strong>Prefill-heavy</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>测试目标</strong></td>
-<td>多轮对话连贯性与上下文保持</td>
-<td>解码阶段的生成效率</td>
-<td>输入处理阶段的预填充效率</td>
-</tr>
-<tr>
-<td><strong>数据特点</strong></td>
-<td>多轮对话结构化数据</td>
-<td>长输出生成任务</td>
-<td>长输入处理任务</td>
-</tr>
-<tr>
-<td><strong>资源消耗</strong></td>
-<td>依赖对话轮次和上下文长度</td>
-<td>解码时显存与计算资源密集</td>
-<td>预填充时显存与计算资源密集</td>
-</tr>
-<tr>
-<td><strong>典型优化手段</strong></td>
-<td>增强上下文记忆机制</td>
-<td>优化解码算法（如 Beam Search）</td>
-<td>改进 KV 缓存策略</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="总结😎"><a href="#总结😎" class="headerlink" title="总结😎"></a>总结😎</h3><ul>
-<li><strong>ShareGPT</strong> 侧重于评估模型在复杂对话流中的表现，属于功能性和场景化测试2。</li>
-<li><strong>Decode-heavy</strong> 和 <strong>Prefill-heavy</strong> 属于性能测试的子类，分别针对生成阶段和输入处理阶段的资源效率进行优化410。</li>
-<li>实际应用中，这三类测试可能结合使用。例如，在部署多轮对话系统时，需同时验证 ShareGPT 格式的对话质量（功能测试）、解码阶段的响应速度（Decode-heavy 测试）及长上下文的处理能力（Prefill-heavy 测试）。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://blog.hank.host/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/" data-id="cm8cx2kvj00013zd8gmeq52ut" data-title="ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/">开源工具</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tool/" rel="tag">Tool</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/Tool/" style="font-size: 10px;">Tool</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/">开源小工具</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/">ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 Hank Jing<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+        return <html lang={language ? language.substr(0, 2) : ''}>
+            <Head site={site} config={config} helper={helper} page={page} />
+            <body class={`is-${columnCount}-column`}>
+                <Navbar config={config} helper={helper} page={page} />
+                <section class="section">
+                    <div class="container">
+                        <div class="columns">
+                            <div class={classname({
+                                column: true,
+                                'order-2': true,
+                                'column-main': true,
+                                'is-12': columnCount === 1,
+                                'is-8-tablet is-8-desktop is-8-widescreen': columnCount === 2,
+                                'is-8-tablet is-8-desktop is-6-widescreen': columnCount === 3
+                            })} dangerouslySetInnerHTML={{ __html: body }}></div>
+                            <Widgets site={site} config={config} helper={helper} page={page} position={'left'} />
+                            <Widgets site={site} config={config} helper={helper} page={page} position={'right'} />
+                        </div>
+                    </div>
+                </section>
+                <Footer config={config} helper={helper} />
+                <Scripts site={site} config={config} helper={helper} page={page} />
+                <Search config={config} helper={helper} />
+            </body>
+        </html>;
+    }
+};
