@@ -1,4 +1,4 @@
-name: Sync main branch from Gitea
+name: Sync from Gitea
 
 on:
   repository_dispatch:
@@ -26,7 +26,7 @@ jobs:
     - name: Add Gitea remote
       run: git remote add gitea ${{ vars.GITEA_URL }}
 
-    - name: Fetch Gitea main branch
+    - name: Fetch Gitea branch
       run: git fetch gitea ${{ vars.GITEA_BRANCH }}
 
     - name: Configure Git user
@@ -34,7 +34,7 @@ jobs:
         git config --global user.email "${{ vars.GIT_USER_EMAIL }}"
         git config --global user.name "${{ vars.GIT_USER_NAME }}"
 
-    - name: Force merge Gitea main into master
+    - name: Force merge Gitea branch
       run: |
         git checkout ${{ vars.MY_BRANCH }}
         git merge gitea/${{ vars.GITEA_BRANCH }} --allow-unrelated-histories --strategy-option theirs
