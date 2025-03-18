@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>开源小工具</title>
+    <url>/2025/03/16/opensource_tools/</url>
+    <content><![CDATA[<h1 id="字幕相关："><a href="#字幕相关：" class="headerlink" title="字幕相关："></a>字幕相关：</h1><h2 id="pysubs2"><a href="#pysubs2" class="headerlink" title="pysubs2:"></a>pysubs2:</h2><p><a href="https://github.com/tkarabela/pysubs2/">pysubs2</a>是一个用于编辑字幕文件的Python库。它基于SubStation  Alpha，即Aegisub的本地格式；同时也支持SubRip（SRT）、MicroDVD、MPL2、TMP、WebVTT、TTML和SAMI格式。此外，还有一个用于批量转换和重新计时的CLI小工具。</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">pip install pysubs2</span><br><span class="line">pysubs2 --shift 0.3s *.srt</span><br><span class="line">pysubs2 --to srt *.ass</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pysubs2</span><br><span class="line">subs = pysubs2.load(<span class="string">"my_subtitles.ass"</span>, encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">subs.shift(s=<span class="number">2.5</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> subs:</span><br><span class="line">    line.text = <span class="string">"{\\be1}"</span> + line.text</span><br><span class="line">subs.save(<span class="string">"my_subtitles_edited.ass"</span>)</span><br></pre></td></tr></tbody></table></figure>
+]]></content>
+      <categories>
+        <category>开源工具</category>
+      </categories>
+      <tags>
+        <tag>Github</tag>
+        <tag>Tool</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>title</title>
     <url>/2025/03/17/test/</url>
     <content><![CDATA[<h1 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h1><p><img src="https://blog-hank-host.oss-cn-beijing.aliyuncs.com/pictures/2025/03/DALL%C2%B7E%202024-05-23%2012.45.31%20-%20A%20bar%20sign%20for%20%27Cycling%20Photography%27%20incorporating%20elements%20like%20a%20camera%2C%20a%20bicycle%2C%20scenic%20landscapes%2C%20people%20enjoying%20cycling%2C%20and%20food.%20The%20design_d850ca9ebd28006e5fe6d25952d98055.webp" alt="Test"></p>
@@ -78,22 +94,6 @@
       <tags>
         <tag>AI</tag>
         <tag>LLM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开源小工具</title>
-    <url>/2025/03/16/%E5%BC%80%E6%BA%90%E5%B0%8F%E5%B7%A5%E5%85%B7/</url>
-    <content><![CDATA[<h1 id="字幕相关："><a href="#字幕相关：" class="headerlink" title="字幕相关："></a>字幕相关：</h1><h2 id="pysubs2"><a href="#pysubs2" class="headerlink" title="pysubs2:"></a>pysubs2:</h2><p><a href="https://github.com/tkarabela/pysubs2/">pysubs2</a>是一个用于编辑字幕文件的Python库。它基于SubStation  Alpha，即Aegisub的本地格式；同时也支持SubRip（SRT）、MicroDVD、MPL2、TMP、WebVTT、TTML和SAMI格式。此外，还有一个用于批量转换和重新计时的CLI小工具。</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">pip install pysubs2</span><br><span class="line">pysubs2 --shift 0.3s *.srt</span><br><span class="line">pysubs2 --to srt *.ass</span><br></pre></td></tr></tbody></table></figure>
-
-<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pysubs2</span><br><span class="line">subs = pysubs2.load(<span class="string">"my_subtitles.ass"</span>, encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">subs.shift(s=<span class="number">2.5</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> subs:</span><br><span class="line">    line.text = <span class="string">"{\\be1}"</span> + line.text</span><br><span class="line">subs.save(<span class="string">"my_subtitles_edited.ass"</span>)</span><br></pre></td></tr></tbody></table></figure>
-]]></content>
-      <categories>
-        <category>开源工具</category>
-      </categories>
-      <tags>
-        <tag>Github</tag>
-        <tag>Tool</tag>
       </tags>
   </entry>
 </search>
