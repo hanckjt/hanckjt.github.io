@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>title</title>
+    <url>/2025/03/17/test/</url>
+    <content><![CDATA[<h1 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h1><p><img src="https://blog-hank-host.oss-cn-beijing.aliyuncs.com/pictures/2025/03/DALL%C2%B7E%202024-05-23%2012.45.31%20-%20A%20bar%20sign%20for%20%27Cycling%20Photography%27%20incorporating%20elements%20like%20a%20camera%2C%20a%20bicycle%2C%20scenic%20landscapes%2C%20people%20enjoying%20cycling%2C%20and%20food.%20The%20design_d850ca9ebd28006e5fe6d25952d98055.webp" alt="Test"></p>
+<p><img src="https://blog-hank-host.oss-cn-beijing.aliyuncs.com/pictures/2025/03/image_84dddbd8a3d78c14aea7d762a16b24d0.jpeg" alt="Test2"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>ShareGPT、Decode-heavy 和 Prefill-heavy三个大模型测试</title>
     <url>/2025/03/16/%E4%B8%89%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<h3 id="1-ShareGPT"><a href="#1-ShareGPT" class="headerlink" title="1. ShareGPT"></a>1. <strong>ShareGPT</strong></h3><p><strong>定义与背景</strong>：ShareGPT 是一种基于真实多轮对话数据的指令微调格式，最初来源于用户在社交平台分享的与聊天模型的交互记录。其核心目标是帮助模型学习复杂的多轮对话上下文保持能力，提升连贯性、信息检索和一致性2。<strong>测试特点</strong>：</p>
